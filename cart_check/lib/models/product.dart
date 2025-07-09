@@ -1,5 +1,7 @@
 // 장바구니 항목
 
+import 'package:flutter/material.dart';
+
 enum ProductStatus {
   cart,      // 장바구니에 있는 상태 (구매 전)
   purchased  // 구매 완료 상태
@@ -15,7 +17,7 @@ class Product {
   final DateTime? purchasedAt; // 상품을 구매한 시각 (purchased 상태일 때만 사용)
   final ProductStatus status; // 현재 상품 상태 (장바구니 or 구매 완료)
   final bool notificationEnabled; // 알림 활성화 여부 (구매 알림 등)
-  final bool urgent; // 긴급 구매 여부 (사용자 설정, true일 경우 우선순위 높게 표시)
+  final TimeOfDay? notificationTime; // 상품별 푸시 알림 시간 (TimeOfDay는 JSON 직렬화가 안되므로 DateTime으로 저장)
 
   Product({
     required this.id,
@@ -27,7 +29,7 @@ class Product {
     this.purchasedAt,
     this.status = ProductStatus.cart,
     this.notificationEnabled = false,
-    this.urgent = false,
+    this.notificationTime,
   });
 
   // 복사본 생성 메서드 (변경된 필드만 업데이트)
@@ -41,7 +43,7 @@ class Product {
     DateTime? purchasedAt,
     ProductStatus? status,
     bool? notificationEnabled,
-    bool? urgent,
+    TimeOfDay? notificationTime,
   }) {
     return Product(
       id: id ?? this.id,
@@ -53,7 +55,7 @@ class Product {
       purchasedAt: purchasedAt ?? this.purchasedAt,
       status: status ?? this.status,
       notificationEnabled: notificationEnabled ?? this.notificationEnabled,
-      urgent: urgent ?? this.urgent,
+      notificationTime: notificationTime ?? this.notificationTime,
     );
   }
 
@@ -71,7 +73,13 @@ class Product {
           ? ProductStatus.purchased
           : ProductStatus.cart,
       notificationEnabled: json['notificationEnabled'] ?? false,
-      urgent: json['urgent'] ?? false,
+      notificationTime: (json['notificationHour'] != null &&
+          json['notificationMinute'] != null)
+          ? TimeOfDay(
+        hour: json['notificationHour'],
+        minute: json['notificationMinute'],
+      )
+          : null,
     );
   }
 
@@ -87,7 +95,8 @@ class Product {
       'purchasedAt': purchasedAt?.toIso8601String(),
       'status': status.name,
       'notificationEnabled': notificationEnabled,
-      'urgent': urgent,
+      'notificationHour': notificationTime?.hour,
+      'notificationMinute': notificationTime?.minute,
     };
   }
 }
