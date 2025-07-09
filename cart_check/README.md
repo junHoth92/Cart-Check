@@ -1,16 +1,40 @@
 # cart_check
 
-장바구니 확인 앱
+# 프로젝트명
+CartCheck
 
-## Getting Started
+# 프로젝트 개요
+사용자가 상품 구매 전에 다양한 온/오프라인 쇼핑몰에서 찜한 제품들을 한 곳에 모아 관리하고, 
+구매 시기를 놓치지 않도록 알림해주며, 
+링크를 통해 손쉽게 이동할 수 있도록 지원하는 쇼핑 보조 앱입니다.
 
-This project is a starting point for a Flutter application.
+# 개발 환경
+Flutter (Channel stable, 3.32.5, on Microsoft Windows [Version 10.0.26100.4484], locale ko-KR)
+Dart SDK version: 3.8.1 (stable)
+Android toolchain - develop for Android devices (Android SDK version 35.0.1)
+Android Studio (version 2024.3.2)
 
-A few resources to get you started if this is your first Flutter project:
+# 주요 기능
+1. 장바구니/구매 목록 관리
+   * 상품명, 이미지, 가격, 링크 등록
+   * 구매 예정 여부, 알림 설정
+   * 목록에서 직접 삭제, 수정 가능
+   * 태그 또는 카테고리별로 정리 가능
+2. 웹뷰 링크
+   * 구매하려는 상품의 인터넷 판매 링크를 저장하여 언제든 확인 가능
+3. 푸시 알림
+   * 구매를 잊어버리지 않도록 시간 기반 알림
+   * FCM 기반 푸시 알림 지원
+   * 푸시 알림 시간 설정
+4. 설정 기능
+   * 테마 설정 (다크/라이트 모드)
+   * 앱 데이터 초기화
+   * 앱 버전 확인
+   * 오픈소스 라이선스 보기
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# 향후 확장 아이디어
+1. 친구와 공유 기능(공동 장바구니)
+2. 광고 수익화
+    * Google AdMob을 통한 배너/전면 광고
+    * 설정 또는 특정 조건에서 광고 제거 옵션 제공 가능
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
